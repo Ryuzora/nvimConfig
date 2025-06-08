@@ -1,0 +1,8 @@
+{
+  "html": {
+    "snippets": {
+      "mybtn": "<button class=\"btn\">Click Me</button>",
+      "card": "<div class=\"card\">\n  <h2 class=\"card-title\">${1:Title}</h2>\n  <p>${2:Content}</p>\n</div>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+local wk = require("which-key")
+
+wk.add({
+  d = {
+    name = "Debug", -- group name shown in which-key
+    c = { function() require("dap").continue() end, "Continue" },
+    b = { function() require("dap").toggle_breakpoint() end, "Toggle Breakpoint" },
+    B = { function()
+      local cond = vim.fn.input("Breakpoint condition: ")
+      require("dap").set_breakpoint(cond)
+    end, "Conditional Breakpoint" },
+    r = { function() require("dap").repl.open() end, "Open REPL" },
+    l = { function() require("dap").run_last() end, "Run Last" },
+    s = { function() require("dap").step_over() end, "Step Over" },
+    i = { function() require("dap").step_into() end, "Step Into" },
+    o = { function() require("dap").step_out() end, "Step Out" },
+    q = { function() require("dap").close() end, "Quit Debugging" },
+    u = { function() require("dapui").toggle() end, "Toggle DAP UI" },
+  },
+}, { prefix = "<leader>", mode = "n" })

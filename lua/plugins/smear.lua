@@ -1,0 +1,16 @@
+return {
+  "sphambam/smear-cursor.nvim",
+  event = "VeryLazy",
+  opts = {
+    stiffness = 0,
+    trailing_stiffness = 0,
+    stiffness_insert_mode = 0.6,
+    trailing_stiffness_insert_mode = 0.6,
+    distance_stop_animating = 0.5,
+    smear_insert_mode = true,
+    time_interval = 5,
+    length = 20,
+    min_length = 3,
+    highlight_group = "IncSearch",
+  },
+}
