@@ -1,0 +1,51 @@
+return {
+  "xiyaowong/transparent.nvim",
+  lazy = false, -- Ensure it loads on startup
+  config = function()
+    require("transparent").setup({
+      groups = {
+        "Normal",
+        "NormalNC",
+        "Comment",
+        "Constant",
+        "Special",
+        "Identifier",
+        "Statement",
+        "PreProc",
+        "Type",
+        "Underlined",
+        "Todo",
+        "String",
+        "Function",
+        "Conditional",
+        "Repeat",
+        "Operator",
+        "Structure",
+        "LineNr",
+        "NonText",
+        "SignColumn",
+        "CursorLine",
+        "CursorLineNr",
+        "StatusLine",
+        "StatusLineNC",
+        "EndOfBuffer",
+      },
+      extra_groups = {
+        "NeoTreeNormal",
+        "NeoTreeNormalNC",
+        "NeoTreeEndOfBuffer",
+        "NeoTreeWinSeparator",
+        "NeoTreeCursorLine",
+      },
+      exclude_groups = {},
+    })
+
+    -- Ensure transparency is reapplied when NeoTree loads
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "neo-tree",
+      callback = function()
+        require("transparent").clear_prefix("NeoTree")
+      end,
+    })
+  end,
+}

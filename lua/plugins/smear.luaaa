@@ -9,7 +9,11 @@ return {
     distance_stop_animating = 0.5,
     smear_insert_mode = true,
     time_interval = 5,
+
     length = 20,
+
+    legacy_computing_symbol_support = true,
+
     min_length = 3,
     highlight_group = "IncSearch",
   },

@@ -1,0 +1,70 @@
+-- ~/.config/nvim/lua/plugins/alpha.lua
+
+return {
+  "goolord/alpha-nvim",
+  -- We keep event = "VimEnter" so the dashboard is available right away
+  event = "VimEnter",
+  config = function()
+    local alpha = require("alpha")
+    local dashboard = require("alpha.themes.dashboard")
+
+    -- Get the dashboard configuration options
+    local config = dashboard.opts
+
+    -- Define the layout for a floating window
+    config.layout = {
+      -- Set the width and height of the floating window
+      { type = "padding", val = 1 },
+      dashboard.section.header,
+      { type = "padding", val = 2 },
+      dashboard.section.buttons,
+      { type = "padding", val = 1 },
+      dashboard.section.mru_list,
+      { type = "padding", val = 1 },
+      dashboard.section.footer,
+    }
+    
+    -- Add window options to make it look like a popup
+    config.opts.winopts = {
+      width = 0.5, -- 50% of the screen width
+      height = 0.5, -- 50% of the screen height
+      -- You can also use absolute values, e.g., width = 80, height = 25
+      
+      -- Add a border like Mason or Telescope
+      border = "single", -- can be 'none', 'single', 'double', 'rounded'
+    }
+
+    -- Set the header
+    dashboard.section.header.val = {
+      [=[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║██║   ██║██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝╚██████╔╝██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝     ╚═╝
+      ]=],
+    }
+    dashboard.section.header.opts.hl = "String"
+
+    -- Set the buttons
+    dashboard.section.buttons.val = {
+      dashboard.button("f", "󰈞  Find File", "<cmd>Telescope find_files<cr>"),
+      dashboard.button("n", "  New File", "<cmd>enew<cr>"),
+      dashboard.button("r", "  Recent Files", "<cmd>Telescope oldfiles<cr>"),
+      dashboard.button("l", "󰒲  Lazy", "<cmd>Lazy<cr>"),
+      dashboard.button("q", "  Quit", "<cmd>qa<cr>"),
+    }
+
+    -- Set recent files
+    dashboard.section.mru_list.val = 5 -- A smaller number looks better in a popup
+    dashboard.section.mru_list.opts.hl = "Number"
+
+    -- Set the footer
+    dashboard.section.footer.val = require("alpha.fortune")()
+    dashboard.section.footer.opts.hl = "Italic"
+
+    -- Apply the theme with our new floating window config
+    alpha.setup(config)
+  end,
+}
