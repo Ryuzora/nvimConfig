@@ -1,4 +1,5 @@
-# Ryuzora's NeoVim Configuration
+# 💤 Ryuzora's NeoVim Configuration
 
-This is used to backup my Neovim Configuration[LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+Using [LazyVim](https://github.com/LazyVim/LazyVim) for the setup
+
+Tapi males banget isi readme nya jadi ya gini aja
