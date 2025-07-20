@@ -14,6 +14,9 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+-- DBUI
+vim.g.db_ui_win_position = "left"
+
 -- diagnostic signs
 vim.fn.sign_define("LspError", { text = "✗", texthl = "LspDiagnosticsError" })
 vim.fn.sign_define("LspWarning", { text = "⚠", texthl = "LspDiagnosticsWarning" })
