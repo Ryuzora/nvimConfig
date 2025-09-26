@@ -8,7 +8,7 @@ function M.coderun()
   local exec_dir = "./executables"
 
   -- Create exe files
-  if filetype == "c" or filetype == "cpp" or filetype == "rust" then
+  if filetype == "c" or filetype == "cpp" or filetype == "rust" or filetype == "java" then
     if vim.fn.isdirectory(exec_dir) == 0 then
       vim.fn.mkdir(exec_dir)
       vim.notify("Created directory: " .. exec_dir, vim.log.levels.INFO)
@@ -21,6 +21,7 @@ function M.coderun()
     c = string.format("gcc %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
     cpp = string.format("g++ %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
     rust = string.format("rustc %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
+    java = string.format("javac -d %s *.java && java -cp %s %s", exec_dir, exec_dir, file),
   }
 
   if commands[filetype] then
