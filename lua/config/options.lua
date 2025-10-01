@@ -4,6 +4,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 vim.opt.linebreak = true
+vim.opt.smartindent = true
 
 -- diagnostic options
 vim.diagnostic.config({

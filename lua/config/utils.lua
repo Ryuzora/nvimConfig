@@ -2,7 +2,6 @@ local M = {}
 
 function M.coderun()
   vim.cmd("write")
-
   local file = vim.fn.expand("%")
   local filetype = vim.bo.filetype
   local exec_dir = "./executables"
@@ -21,12 +20,20 @@ function M.coderun()
     c = string.format("gcc %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
     cpp = string.format("g++ %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
     rust = string.format("rustc %s -o %s/%s && %s/%s", vim.fn.shellescape(file), exec_dir, vim.fn.expand("%:r"), exec_dir, vim.fn.expand("%:r")),
-    java = string.format("javac -d %s *.java && java -cp %s %s", exec_dir, exec_dir, file),
+    java = string.format("javac -d %s *.java && java -cp %s %s", exec_dir, exec_dir, vim.fn.expand("%:t:r")),
   }
 
   if commands[filetype] then
-    vim.cmd("split | terminal " .. commands[filetype])
-    vim.cmd("autocmd termOpen * setlocal nowrap")
+    vim.cmd("Floaterminal")
+    vim.defer_fn(function()
+      local chan_id = vim.b.terminal_job_id
+      if chan_id then
+        vim.api.nvim_chan_send(chan_id, commands[filetype] .. "\n")
+      else
+        vim.notify("Terminal not ready to receive input", vim.log.levels.ERROR)
+      end
+    end, 500)
+    vim.cmd("startinsert")
   else
     vim.notify("No run command configured for filetype: " .. filetype, vim.log.levels.WARN)
   end

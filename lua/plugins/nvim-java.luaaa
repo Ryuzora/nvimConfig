@@ -1,0 +1,11 @@
+return {'nvim-java/nvim-java',
+  ft = {'java'},
+  config = function()
+      require('java').setup({
+    })
+  end,
+  dependencies = {
+    'nvim-lua/plenary.nvim',  -- Required for utility functions
+    'nvim-treesitter/nvim-treesitter',  -- For syntax highlighting
+  },
+}
